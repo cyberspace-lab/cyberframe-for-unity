@@ -1,0 +1,11 @@
+{
+  "experimentname": "cyberframedemo",
+  "trialsettings": [
+    {
+      "target": "hello"
+    },
+    {
+      "target": "big"
+    }
+  ],
+}
