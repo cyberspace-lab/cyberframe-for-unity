@@ -11,8 +11,6 @@ namespace cyberframe.Experiment
         public event SettingsChangeHandler OnSettingsChanged;
         public event SettingsChangeHandler OnSettingsParseError;
 
-        public delegate void SettingsResourcesValidationHandler();
-
         [ShowInInspector]
         [InlineEditor]
         public ExperimentSettings ActiveSettings { get; private set; }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Sirenix.OdinInspector;
@@ -8,8 +7,7 @@ using UnityEngine;
 
 namespace cyberframe.Experiment
 {
-    [CreateAssetMenu(fileName = "ExperimentSettings", menuName = "Cyberframe/Create experiment settings", order = 10)]
-    public class ExperimentSettings : SerializedScriptableObject
+    public abstract class ExperimentSettings : SerializedScriptableObject
     {
         public static readonly string ExpectedPath = Path.Combine(Directory.GetCurrentDirectory(), "cyberframe");
 
@@ -21,10 +19,7 @@ namespace cyberframe.Experiment
         [JsonIgnore]
         private string _serializedSettings = "";
 
-        public virtual TrialSettings GetTrialSettings(int i)
-        {
-            return null;
-        }
+        public abstract TrialSettings GetTrialSettings(int i);
 
         public string Description()
         {

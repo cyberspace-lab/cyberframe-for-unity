@@ -63,11 +63,9 @@ namespace cyberframe.FileHandeling
 
         public ExperimentSettings ParseString(string content)
         {
-            var settings = ParseSettings<ExperimentSettings>(content);
-            if (settings != null)
-            {
-                settings = LoadSettings(settings.ExperimentName, content);
-            }
+            var settingsStub = ParseSettings<ExperimentSettingsStub>(content);
+            if (settingsStub == null) return null;
+            var settings = LoadSettings(settingsStub.ExperimentName, content);
             return settings;
         }
 
@@ -88,6 +86,16 @@ namespace cyberframe.FileHandeling
             return settings;
         }
     }
+
+    // Only used to get the experiment name
+    public class ExperimentSettingsStub : ExperimentSettings
+    {
+        public override TrialSettings GetTrialSettings(int i)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 
 #if UNITY_EDITOR
     [CustomEditor(typeof(ExperimentSettingsLoader), true)]

@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using BrainVR.UnityFramework.UI.InGame;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,11 +14,6 @@ namespace cyberframe.Experiment
 
         public static ExperimentManager instance;
         
-        [BoxGroup("Required objects")]
-        [SerializeField]
-        [Required] 
-        private ExperimentCanvasManager _experimentCanvasManager = null;
-
         
         [BoxGroup("Required objects")]
         [SerializeField]
