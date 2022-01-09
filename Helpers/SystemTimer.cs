@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Assets.monocularvr.Helpers
+namespace cyberframe.Helpers
 {
     public class SystemTimer : MonoBehaviour
     {
