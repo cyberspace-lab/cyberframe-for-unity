@@ -1,18 +1,45 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLogger : MonoBehaviour
+namespace cyberframe.Logging
 {
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerLogger : MonoBehaviour
     {
-        
-    }
+        private List<PlayerLog> _logs;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        #region MonoBehaviour
+        void Awake()
+        {
+            var logs = FindObjectsOfType<PlayerLog>();
+            _logs = new List<PlayerLog>(logs);
+        }
+        #endregion
+        #region Public API
+
+        public void StartLogging()
+        {
+            foreach (var log in _logs)
+            {
+                log.StartLogging();
+            }
+        }
+
+        public void StopLogging()
+        {
+            foreach (var log in _logs)
+            {
+                log.StopLogging();
+            }
+        }
+
+        public void Setup(string timestamp, string id)
+        {
+            foreach (var log in _logs)
+            {
+                log.Setup(timestamp, id);
+            }
+
+        }
+        #endregion
     }
 }
