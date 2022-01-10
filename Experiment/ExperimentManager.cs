@@ -1,5 +1,4 @@
 using System;
-using BrainVR.UnityFramework.UI.InGame;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -13,7 +12,6 @@ namespace cyberframe.Experiment
         public event ExperimentStateHandler OnExperimentFinished;
 
         public static ExperimentManager instance;
-        
         
         [BoxGroup("Required objects")]
         [SerializeField]
