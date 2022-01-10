@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2553537849441493321}
   - component: {fileID: 713347297033196304}
   - component: {fileID: 1007762625860653531}
+  - component: {fileID: 5260797620346819914}
   - component: {fileID: 8000433797396459589}
   m_Layer: 0
   m_Name: Logger
@@ -58,6 +59,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45ebae8969353647b759db4c59c1af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5260797620346819914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433313273073619809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3291182fdd115934881ed135a0c552bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8000433797396459589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,3 +87,4 @@ MonoBehaviour:
   ShouldLog: 1
   _infoLog: {fileID: 713347297033196304}
   _experimentLog: {fileID: 1007762625860653531}
+  _playerLogger: {fileID: 5260797620346819914}
