@@ -91,7 +91,7 @@ namespace cyberframe.Experiment
 
         public TrialSettings CurrentTrial => Settings.GetTrialSettings(iTrial);
 
-        [ShowInInspector]
+        [ShowInInspector][InlineEditor()]
         public ExperimentSettings Settings { get; protected set; }
 
         public delegate void ExperimentStateChangeHandler(ExperimentState state);
@@ -121,7 +121,11 @@ namespace cyberframe.Experiment
         public event EventHandler<IExperimentLoggable.TrialStateArgs> TrialStateChanged;
         public event EventHandler<IExperimentLoggable.TrialEventArgs> TrialEventSent;
         public event EventHandler<IExperimentLoggable.ExperimentMessageArgs> MessageSent;
-        public abstract string ExperimentHeaderLog();
+
+        public virtual string ExperimentHeaderLog()
+        {
+            return Settings.SerializeSettings();
+        }
 
         #region Monobehaviour
         void Update()
@@ -262,6 +266,10 @@ namespace cyberframe.Experiment
         #endregion
 
         #region Experiment and trial flow
+        /// <summary>
+        /// CheckExperiment Finished is being checked automatically after each trial is finished and cleaned up before any new trials start
+        /// </summary>
+        /// <returns></returns>
         public abstract bool CheckExperimentFinished();
 
         // This gets updated from Experiment manager, which is monobehaviou
