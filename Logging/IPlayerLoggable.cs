@@ -1,18 +1,12 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class IPlayerLoggable : MonoBehaviour
+namespace cyberframe.Logging
 {
-    // Start is called before the first frame update
-    void Start()
+    public interface IPlayerLoggable
     {
-        
+        string HeaderLine();
+        List<string>  PlayerInformation();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
