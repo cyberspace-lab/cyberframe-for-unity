@@ -21,7 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  ExperimentName: Monocular
+  ExperimentName: Demo
   TrialSettings:
-  - target: hello
-  - target: nope
+  - target: Bob
+  - target: Mark
+  - target: Tammy
+  - target: Mary

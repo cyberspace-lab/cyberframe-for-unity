@@ -1,14 +1,52 @@
+using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using UnityEngine;
+
 namespace cyberframe.Demo
 {
     public class DemoExperiment : Experiment.Experiment
     {
-        public override string ExperimentHeaderLog()
-        {
-            throw new System.NotImplementedException();
-        }
+        private DemoExperimentSettings MySettings => (DemoExperimentSettings) Settings;
+        private string CurrentTargetName => MySettings.TrialSettings[iTrial].target;
+
+        [ShowInInspector]
+        private List<DemoTarget> _targets = new List<DemoTarget>();
+        
         public override bool CheckExperimentFinished()
         {
-            throw new System.NotImplementedException();
+            return iTrial >= (_targets.Count - 2);
+        }
+
+        protected override void ExperimentOnSetup()
+        {
+            var targets = FindObjectsOfType<DemoTarget>();
+            _targets = new List<DemoTarget>(targets);
+            foreach (var target in _targets)
+            {
+                target._experiment = this;
+            }
+        }
+
+        protected override void ExperimentAfterStart()
+        {
+            NextTrial();
+        }
+
+        protected override void TrialAfterSetup()
+        {
+            StartTrial();
+        }
+
+        protected override void TrialAfterFinish()
+        {
+            NextTrial();
+        }
+
+        public void ColliderEntered(string targetName)
+        {
+            Debug.Log("Collider entered: " + targetName);
+            if(targetName == CurrentTargetName) FinishTrial();
+
         }
     }
 }
