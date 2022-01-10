@@ -34,6 +34,7 @@ namespace cyberframe.Logging
 
         #endregion
 
+        #region Public API
         public void Setup(string timestamp = null, string id = "NEO")
         {
             BeforeLogSetup();
@@ -46,7 +47,13 @@ namespace cyberframe.Logging
             Log?.Close();
             IsLogging = false;
         }
+        public string GetLogTimestamp()
+        {
+            return Log.DateString;
+        }
 
+        #endregion
+        
         protected virtual void WriteLine(List<string> strgs)
         {
             Log.WriteList(strgs);
@@ -57,10 +64,6 @@ namespace cyberframe.Logging
             Log.WriteLine(str);
         }
 
-        public string GetLogTimestamp()
-        {
-            return Log.DateString;
-        }
 
         #region Helpers
 

@@ -17,10 +17,12 @@ namespace cyberframe.Logging
 
         public string CreationTimestamp { get; private set; }
 
-        [SerializeField] 
+        [SerializeField] [Required]
         private ExperimentInfoLog _infoLog = null;
-        [SerializeField]
+        [SerializeField] [Required]
         private ExperimentLog _experimentLog = null;
+        [SerializeField] [Required]
+        private PlayerLogger _playerLogger = null;
 
         #region Monobehaviour
         void Awake()
@@ -52,16 +54,18 @@ namespace cyberframe.Logging
             CreationTimestamp = DateTime.Now.ToString("HH-mm-ss-dd-MM-yyy");
             _infoLog.Setup(CreationTimestamp, ParticipantInfo.Code);
             _experimentLog.Setup(CreationTimestamp, ParticipantInfo.Code);
-
             _experimentLog.StartLogging();
+            _playerLogger.Setup(CreationTimestamp, ParticipantInfo.Code);
         }
         public void StartLogging()
         {
             if (!ShouldLog) return;
+            _playerLogger.StartLogging();
         }
         public void StopLogging()
         {
             _experimentLog.StopLogging();
+            _playerLogger.StopLogging();
         }
         #endregion
     }
