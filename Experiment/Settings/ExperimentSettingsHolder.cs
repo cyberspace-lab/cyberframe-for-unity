@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -15,6 +16,10 @@ namespace cyberframe.Experiment
         [InlineEditor]
         public ExperimentSettings ActiveSettings { get; private set; }
 
+        public bool HasActivesettings => ActiveSettings != null;
+        
+        [InlineEditor()] public List<ExperimentSettings> Settings;
+
         public void TrySetSettings(ExperimentSettings settings)
         {
             if (!settings.Validate())
@@ -24,6 +29,7 @@ namespace cyberframe.Experiment
             }
             SetSettings(settings);
         }
+        
         public void SendSettingsParsingError()
         {
             OnSettingsParseError?.Invoke();

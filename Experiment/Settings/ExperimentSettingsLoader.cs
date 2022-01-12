@@ -24,7 +24,7 @@ namespace cyberframe.FileHandeling
         {
             FileBrowser.SetFilters(true, new FileBrowser.Filter("Settings", ".json"));
             yield return FileBrowser.WaitForLoadDialog(FileBrowser.PickMode.FilesAndFolders, false,
-                initialPath: ExperimentSettings.ExpectedPath, null, "Nahrát nastavení", "Load");
+                initialPath: ExperimentSettings.ExpectedPath, null, "Nahrï¿½t nastavenï¿½", "Load");
 
             // Dialog is closed
             Debug.Log(FileBrowser.Success);

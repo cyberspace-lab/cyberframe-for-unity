@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using Newtonsoft.Json;
 using Sirenix.OdinInspector;
@@ -11,7 +11,7 @@ namespace cyberframe.Experiment
     {
         public static readonly string ExpectedPath = Path.Combine(Directory.GetCurrentDirectory(), "cyberframe");
 
-        public string ExperimentName = "Monocular";
+        public string ExperimentName = "Settings";
 
         [FoldoutGroup("Serialization")]
         [InfoBox("$_serializedSettings")]
