@@ -89,7 +89,7 @@ namespace cyberframe.Experiment
         [BoxGroup("Trial state")]
         public float CurrentTrialTime { get; protected set; } = -1;
 
-        public TrialSettings CurrentTrial => Settings.GetTrialSettings(iTrial);
+        protected TrialSettings CurrentTrialsettings => Settings.GetTrialSettings(iTrial);
 
         [ShowInInspector][InlineEditor()]
         public ExperimentSettings Settings { get; protected set; }
