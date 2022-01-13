@@ -77,17 +77,22 @@ public class BasicFirstPersonController : PlayerController
         throw new System.NotImplementedException();
     }
 
-    public override void EnablePhysics(bool bo = true)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override Vector3 Position
     {
         get { return transform.position; }
         set { gameObject.transform.position = value; }
     }
     public override Vector2 PointingDirection { get { return Rotation; } }
+
+    public override void MoveToPosition(Vector2 position)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void MoveToPosition(Vector3 position)
+    {
+        throw new System.NotImplementedException();
+    }
 
     public override Vector2 Rotation
     {

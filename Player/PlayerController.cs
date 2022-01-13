@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using cyberframe.Logging;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace cyberframe.Player
@@ -8,10 +9,18 @@ namespace cyberframe.Player
     {
         private List<Vector3> _previousPositions = new List<Vector3>();
         private Vector3 _lastPosition;
-        private const int POSITIONS_TO_KEEP = 1000;
-        private const int DEFAULT_UNSTUCK = 100;
+        private const int POSITIONS_TO_KEEP = 100;
+        private const int DEFAULT_UNSTUCK = 50;
+
+        public static PlayerController Instance;
 
         #region MonoBehaviour
+
+        void Awake()
+        {
+            Instance = this;
+        }
+
         void Update()
         {
             UpdatePreviousPositions();
@@ -23,26 +32,23 @@ namespace cyberframe.Player
         #region Public API
         #region Moving
         public abstract void EnableMovement(bool bo = true);
-        public abstract void EnablePhysics(bool bo = true);
         public abstract Vector3 Position { get; set; }
         public Vector2 Vector2Position
         {
-            get { return new Vector2(Position.x, Position.z); }
-            set { Position = new Vector3(value.x, Position.y, value.y); }
+            get => new Vector2(Position.x, Position.z);
+            set => Position = new Vector3(value.x, Position.y, value.y);
         }
-        public void MoveToCenter()
-        {
-            MoveToPosition(new Vector2(0, 0));
-        }
-        public void MoveToPosition(Vector2 position)
-        {
-            var movePosition = new Vector3(position.x, gameObject.transform.position.y, position.y);
-            Position = movePosition;
-        }
+
+        [Button("Move to position"), BoxGroup("Movement")]
+        public abstract void MoveToPosition(Vector2 position);
+        [Button("MoveToPosition"), BoxGroup("Movement")]
+        public abstract void MoveToPosition(Vector3 position);
+        
         public void Unstuck()
         {
             Unstuck(DEFAULT_UNSTUCK);
         }
+
         public void Unstuck(ushort i)
         {
             var iPosition = ((_previousPositions.Count - i > 1) ? _previousPositions.Count - i : 1) - 1;
