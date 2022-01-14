@@ -28,6 +28,7 @@ namespace cyberframe.Experiment
         {
             get
             {
+                if (_settingsHolder == null) return null;
                 if (!_settingsHolder.HasActivesettings) return null;
                 return _experiments.ContainsKey(_settingsHolder.ActiveSettings.ExperimentName) ? 
                     _experiments[_settingsHolder.ActiveSettings.ExperimentName] : null;
