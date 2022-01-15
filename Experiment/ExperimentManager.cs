@@ -99,6 +99,15 @@ namespace cyberframe.Experiment
             }
         }
 
+        public void StartExperiment()
+        {
+            if (Experiment.CurrentExperimentState != Experiment.ExperimentState.Prepared)
+            {
+                Debug.Log("Cannot start unprepared experiment");
+            }
+            Experiment.StartExperiment();
+        }
+
         public void PauseUnpauseExperiment()
         {
             if (Experiment.IsPaused)
