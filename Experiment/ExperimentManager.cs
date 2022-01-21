@@ -60,6 +60,11 @@ namespace cyberframe.Experiment
         [GUIColor(0,1,0)]
         public void PrepareExperiment()
         {
+            if (Experiment == null)
+            {
+                Debug.LogWarning("No valid experiment set up");
+                return;
+            }
             if (Experiment.CurrentExperimentState > 0 && Experiment.CurrentExperimentState != Experiment.ExperimentState.Finished)
             {
                 Debug.LogWarning("Experiment is already active. Finish it first.");
