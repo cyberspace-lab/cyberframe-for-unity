@@ -201,6 +201,10 @@ namespace cyberframe.Experiment
             TrialCleanup();
         }
 
+        public void Cleanup()
+        {
+            ExperimentCleanup();
+        }
         #endregion
 
         #region Trial control
@@ -252,6 +256,7 @@ namespace cyberframe.Experiment
             }
             TrialAfterFinish();
         }
+        
         protected void FinishExperiment()
         {
             if (CurrentExperimentState != ExperimentState.Running && CurrentExperimentState != ExperimentState.Paused)
@@ -292,6 +297,11 @@ namespace cyberframe.Experiment
         protected virtual void TrialAfterFinish(){}
         protected virtual void ExperimentOnFinish(){}
         protected virtual void ExperimentAfterFinish(){}
+        // This is never called on its own. It is meant to be implemented and called as
+        // a special function that can be called even after the experiment is finished
+        // to basically allow showing participant some final info, but then cleaning
+        // up before new experiment start
+        protected virtual void ExperimentCleanup(){}
         #endregion
 
         #region Private helpers
@@ -312,5 +322,6 @@ namespace cyberframe.Experiment
             TrialEventSent?.Invoke(this, new IExperimentLoggable.TrialEventArgs{Experiment = this, Event = s});
         }
         #endregion
+
     }
 }

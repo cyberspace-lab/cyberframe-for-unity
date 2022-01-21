@@ -128,6 +128,12 @@ namespace cyberframe.Experiment
             Experiment.ForceFinishExperiment();
         }
 
+        public void CleanupExperiment()
+        {
+            if (Experiment == null) return;
+            Experiment.Cleanup();
+        }
+        
         public void GoToMenu()
         {
         }
