@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using cyberframe.Player;
 using UnityEngine;
 
 // SOURCE https://sharpcoderblog.com/blog/unity-3d-fps-controller
 [RequireComponent(typeof(CharacterController))]
 
-public class BasicFirstPersonController : PlayerController
+public class BasicFirstPersonController : cyberframe.Player.PlayerController
 {
     public float walkingSpeed = 7.5f;
     public float runningSpeed = 11.5f;
