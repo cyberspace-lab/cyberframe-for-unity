@@ -13,11 +13,6 @@ namespace cyberframe.Logging.DataStructures
                                Code != "" &&
                                Age > -1;
 
-        void OnEnable()
-        {
-            Clear();
-        }
-
         private void Clear()
         {
             Code = "";
