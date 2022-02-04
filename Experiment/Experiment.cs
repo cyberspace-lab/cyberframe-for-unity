@@ -321,6 +321,10 @@ namespace cyberframe.Experiment
         {
             TrialEventSent?.Invoke(this, new IExperimentLoggable.TrialEventArgs{Experiment = this, Event = s});
         }
+        protected void SendMessage(string s)
+        {
+            MessageSent?.Invoke(this, new IExperimentLoggable.ExperimentMessageArgs{Experiment = this, Message = s});
+        }
         #endregion
 
     }
