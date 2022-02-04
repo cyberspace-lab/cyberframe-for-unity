@@ -6,7 +6,8 @@ namespace cyberframe.Logging
 {
     public class ExperimentInfoLog : MonoLog
     {
-        [SerializeField] private SetupInfo _setupInfo;
+        [SerializeField]
+        private SetupInfo _setupInfo;
 
         //default instantiates without the player ID
         protected override string LogName => "ExperimentInfo";

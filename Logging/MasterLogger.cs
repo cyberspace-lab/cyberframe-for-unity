@@ -8,11 +8,13 @@ namespace cyberframe.Logging
 {
     [RequireComponent(typeof(ExperimentInfoLog))]
     [RequireComponent(typeof(ExperimentLog))]
+    [RequireComponent(typeof(PlayerLogger))]
     public class MasterLogger : MonoBehaviour
     {
         public static MasterLogger instance;
         public ParticipantInformation ParticipantInfo;
 
+        [Tooltip("If false then no logs are being created/made")]
         public bool ShouldLog = true;
 
         public string CreationTimestamp { get; private set; }
@@ -57,11 +59,15 @@ namespace cyberframe.Logging
             _experimentLog.StartLogging();
             _playerLogger.Setup(CreationTimestamp, ParticipantInfo.Code);
         }
+
+        [Button]
         public void StartLogging()
         {
             if (!ShouldLog) return;
             _playerLogger.StartLogging();
         }
+
+        [Button]
         public void StopLogging()
         {
             _experimentLog.StopLogging();

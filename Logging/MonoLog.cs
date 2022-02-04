@@ -14,9 +14,12 @@ namespace cyberframe.Logging
     {
         //class that takes care of System logging, not derived from the monobehaviour
         protected Log Log;
+        
+        [SerializeField]
         protected abstract string LogName { get; }
 
-        [ShowInInspector] public bool IsLogging { get; protected set; }
+        [ShowInInspector]
+        public bool IsLogging { get; protected set; }
 
         #region MonoBehaviour
         void OnApplicationQuit()
@@ -24,13 +27,9 @@ namespace cyberframe.Logging
             Close();
         }
 
-        protected virtual void BeforeLogSetup()
-        {
-        }
+        protected virtual void BeforeLogSetup() {}
 
-        protected virtual void AfterLogSetup()
-        {
-        }
+        protected virtual void AfterLogSetup() {}
 
         #endregion
 
@@ -47,11 +46,11 @@ namespace cyberframe.Logging
             Log?.Close();
             IsLogging = false;
         }
+
         public string GetLogTimestamp()
         {
             return Log.DateString;
         }
-
         #endregion
         
         protected virtual void WriteLine(List<string> strgs)
@@ -63,7 +62,6 @@ namespace cyberframe.Logging
         {
             Log.WriteLine(str);
         }
-
 
         #region Helpers
 

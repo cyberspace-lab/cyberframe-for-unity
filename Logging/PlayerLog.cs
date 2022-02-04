@@ -12,7 +12,10 @@ namespace cyberframe.Logging
         //HOW OFTEN DO YOU WANNA LOG
         public float LoggingFrequency = 0.005F;
 
-        protected override string LogName => "player";
+        protected override string LogName => _logName;
+
+        [SerializeField]
+        private string _logName = "player";
 
         private float _deltaTime;
         private double _lastTimeWrite;
@@ -23,12 +26,26 @@ namespace cyberframe.Logging
         // for example, we need one column for input, but it is not always used, so we need to
         // create empty single column
         private const int NEmpty = 1;
+
+        [ShowInInspector, BoxGroup("Log output")]
+        private string Header => _player == null ? "" : _player.HeaderLine();
+
+        [ShowInInspector, BoxGroup("Log output")]
+        private string PlayerInformationLine => _player == null ? "" : string.Join("; ", _player.PlayerInformation());
+
         #region MonoBehaviour
+
+        void Awake()
+        {
+            BeforeLogSetup();
+        }
+
         void Update()
         {
             //calculating FPS
             _deltaTime += (Time.deltaTime - _deltaTime) * 0.1f;
         }
+        
         void FixedUpdate()
         {
             if (!IsLogging) return;
@@ -39,9 +56,9 @@ namespace cyberframe.Logging
         #endregion
 
         #region Monolog variables
-
         protected override void BeforeLogSetup()
         {
+            if (_player != null) return;
             var player = GetComponent<IPlayerLoggable>();
             if (player != null) _player = player;
         }
@@ -50,7 +67,7 @@ namespace cyberframe.Logging
         {
             if (_player == null)
             {
-                Debug.Log("There is no player assigned.");
+                Debug.LogWarning("There is no loggable component on the player log");
                 return;
             }
             Log.WriteLine(HeaderLine());
@@ -63,7 +80,7 @@ namespace cyberframe.Logging
             if (IsLogging) return;
             if (_player == null)
             {
-                Debug.Log("There is no player Game object. Cannot start player log.");
+                Debug.LogWarning("There is no player Game object. Cannot start player log.");
                 Log.WriteLine("No valid player has been assigned");
                 return;
             }
@@ -83,6 +100,7 @@ namespace cyberframe.Logging
             WriteLine(strgs);
         }
         #endregion
+
         #region private function
         private string HeaderLine()
         {

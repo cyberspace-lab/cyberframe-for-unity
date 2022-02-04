@@ -36,7 +36,7 @@ namespace cyberframe.Logging
         {
             DateString = timestamp;
             var folderName = id + "_" + DateTime.Now.ToString("dd-MM-yyy") + "/";
-            FilePath = Application.dataPath + RelativePath + folderName;
+            FilePath = Application.persistentDataPath + RelativePath + folderName;
             Directory.CreateDirectory(FilePath);
             _logFile = new StreamWriter(FilePath + id + "_" + logName + "_" + timestamp + ".txt", true)
                 {AutoFlush = true};

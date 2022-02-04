@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace cyberframe.Logging
 {
     public class PlayerLogger : MonoBehaviour
     {
+        [ShowInInspector]
         private List<PlayerLog> _logs;
 
         #region MonoBehaviour
@@ -15,7 +17,6 @@ namespace cyberframe.Logging
         }
         #endregion
         #region Public API
-
         public void StartLogging()
         {
             foreach (var log in _logs)
