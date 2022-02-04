@@ -6,12 +6,14 @@ using UnityEngine;
 
 namespace cyberframe.Logging
 {
-    [RequireComponent(typeof(ExperimentInfoLog))]
+    [RequireComponent(typeof(SessionInfoLog))]
     [RequireComponent(typeof(ExperimentLog))]
     [RequireComponent(typeof(PlayerLogger))]
     public class MasterLogger : MonoBehaviour
     {
         public static MasterLogger instance;
+        
+        [InlineEditor()]
         public ParticipantInformation ParticipantInfo;
 
         [Tooltip("If false then no logs are being created/made")]
@@ -20,7 +22,7 @@ namespace cyberframe.Logging
         public string CreationTimestamp { get; private set; }
 
         [SerializeField] [Required]
-        private ExperimentInfoLog _infoLog = null;
+        private SessionInfoLog _infoLog = null;
         [SerializeField] [Required]
         private ExperimentLog _experimentLog = null;
         [SerializeField] [Required]
@@ -56,7 +58,6 @@ namespace cyberframe.Logging
             CreationTimestamp = DateTime.Now.ToString("HH-mm-ss-dd-MM-yyy");
             _infoLog.Setup(CreationTimestamp, ParticipantInfo.Code);
             _experimentLog.Setup(CreationTimestamp, ParticipantInfo.Code);
-            _experimentLog.StartLogging();
             _playerLogger.Setup(CreationTimestamp, ParticipantInfo.Code);
         }
 
@@ -64,6 +65,7 @@ namespace cyberframe.Logging
         public void StartLogging()
         {
             if (!ShouldLog) return;
+            if(_experimentLog.IsValid) _experimentLog.StartLogging();
             _playerLogger.StartLogging();
         }
 

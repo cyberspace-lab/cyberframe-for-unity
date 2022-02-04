@@ -12,6 +12,7 @@ namespace cyberframe.Logging
         //HOW OFTEN DO YOU WANNA LOG
         public float LoggingFrequency = 0.005F;
 
+        public override bool IsValid => _player != null;
         protected override string LogName => _logName;
 
         [SerializeField]

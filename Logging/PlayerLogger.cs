@@ -21,7 +21,7 @@ namespace cyberframe.Logging
         {
             foreach (var log in _logs)
             {
-                log.StartLogging();
+                if(log.IsValid) log.StartLogging();
             }
         }
 

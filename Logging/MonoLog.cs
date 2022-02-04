@@ -21,6 +21,8 @@ namespace cyberframe.Logging
         [ShowInInspector]
         public bool IsLogging { get; protected set; }
 
+        public virtual bool IsValid { get; }
+
         #region MonoBehaviour
         void OnApplicationQuit()
         {
@@ -37,11 +39,12 @@ namespace cyberframe.Logging
         public void Setup(string timestamp = null, string id = "NEO")
         {
             BeforeLogSetup();
+            if (!IsValid) return;
             Log = new Log(id, LogName, timestamp);
             AfterLogSetup();
         }
 
-        public virtual void Close()
+        protected virtual void Close()
         {
             Log?.Close();
             IsLogging = false;

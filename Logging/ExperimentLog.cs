@@ -1,34 +1,46 @@
 using System.Collections.Generic;
 using cyberframe.Experiment;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace cyberframe.Logging
 {
     public class ExperimentLog : MonoLog
     {
+        [ShowInInspector]
         private IExperimentLoggable _experiment;
 
-        protected override string LogName => "test_" + _experiment.Name;
+        public override bool IsValid => _experiment != null;
+
+        protected override string LogName => "experiment_" + _experiment.Name;
 
         protected override void BeforeLogSetup()
         {
             //TODO - validation, but it should be fine
             _experiment = ExperimentManager.instance.Experiment;
+            if (!IsValid)
+            {
+                Debug.LogWarning("There is no valid experiment setup. Will not create experiment log");
+            }
         }
 
         protected override void AfterLogSetup()
         {
+            if (!IsValid) return;
             Log.WriteBlock("TEST HEADER", _experiment.ExperimentHeaderLog());
             Log.WriteLine("Time;Sender;Index;Type;Event;");
         }
 
         public void StartLogging()
         {
+            if (!IsValid) return;
             Subscribe();
             IsLogging = true;
         }
 
         public void StopLogging()
         {
+            if (!IsValid) return;
             Unsubscribe();
             IsLogging = false;
             Close();
