@@ -32,8 +32,11 @@ namespace cyberframe.Player
         #endregion
         #region Public API
         #region Moving
+        [Button]
         public abstract void EnableMovement(bool bo = true);
+        [ShowInInspector]
         public abstract Vector3 Position { get; set; }
+        [ShowInInspector]
         public Vector2 Vector2Position
         {
             get => new Vector2(Position.x, Position.z);

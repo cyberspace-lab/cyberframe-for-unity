@@ -1,16 +1,19 @@
 using cyberframe.Logging.DataStructures;
 using Newtonsoft.Json;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace cyberframe.Logging
 {
-    public class ExperimentInfoLog : MonoLog
+    public class SessionInfoLog : MonoLog
     {
-        [SerializeField]
+        [SerializeField, InlineEditor()]
         private SetupInfo _setupInfo;
 
+        public override bool IsValid => true;
+
         //default instantiates without the player ID
-        protected override string LogName => "ExperimentInfo";
+        protected override string LogName => "SessionInfo";
 
         protected override void AfterLogSetup()
         {
@@ -21,7 +24,7 @@ namespace cyberframe.Logging
         {
             _setupInfo.PopulateInfo();
             var s = JsonConvert.SerializeObject(_setupInfo, Formatting.Indented);
-            Log.WriteBlock("EXPERIMENT INFO", s);
+            Log.WriteBlock("SESSION INFO", s);
         }
     }
 }
