@@ -24,7 +24,7 @@ namespace cyberframe.Logging
         readonly StreamWriter _logFile;
         public string FilePath;
         public string DateString;
-        const string RelativePath = "/../logs/";
+        const string RelativePath = "/logs/";
 
         /// <summary>
         /// polymorph for init with timepstmp provided by master log 
@@ -38,8 +38,12 @@ namespace cyberframe.Logging
             var folderName = id + "_" + DateTime.Now.ToString("dd-MM-yyy") + "/";
             FilePath = Application.persistentDataPath + RelativePath + folderName;
             Directory.CreateDirectory(FilePath);
-            _logFile = new StreamWriter(FilePath + id + "_" + logName + "_" + timestamp + ".txt", true)
+            var FileName = FilePath + id + "_" + logName + "_" + timestamp + ".txt";
+            _logFile = new StreamWriter(FileName, true)
                 {AutoFlush = true};
+#if CYBERFRAME_DEBUG
+            Debug.Log("Log " + FileName + " created and saved" );
+#endif
             WriteHeader(id);
         }
 
