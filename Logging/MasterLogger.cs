@@ -16,9 +16,12 @@ namespace cyberframe.Logging
         [InlineEditor()]
         public ParticipantInformation ParticipantInfo;
 
-        [Tooltip("If false then no logs are being created/made")]
+        [BoxGroup("Logging setup"), Tooltip("If false then no logs are being created/made")]
         public bool ShouldLog = true;
 
+        [BoxGroup("Logging setup"), Tooltip("IF true, then all is automatically setup when experiment starts")]
+        public bool StartWithExperiment = true;
+        
         public string CreationTimestamp { get; private set; }
 
         [SerializeField] [Required]
@@ -36,6 +39,7 @@ namespace cyberframe.Logging
 
         void Start()
         {
+            if (!StartWithExperiment) return;
             ExperimentManager.instance.OnExperimentReady += PrepareLogs;
             ExperimentManager.instance.OnExperimentStarted += StartLogging;
             ExperimentManager.instance.OnExperimentFinished += StopLogging;
