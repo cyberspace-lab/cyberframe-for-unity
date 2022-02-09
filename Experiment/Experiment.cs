@@ -122,10 +122,7 @@ namespace cyberframe.Experiment
         public event EventHandler<IExperimentLoggable.TrialEventArgs> TrialEventSent;
         public event EventHandler<IExperimentLoggable.ExperimentMessageArgs> MessageSent;
 
-        public virtual string ExperimentHeaderLog()
-        {
-            return Settings.SerializeSettings();
-        }
+
 
         #region Monobehaviour
         void Update()
@@ -304,7 +301,16 @@ namespace cyberframe.Experiment
         protected virtual void ExperimentCleanup(){}
         #endregion
 
+        #region Logging
+        public virtual string ExperimentHeaderLog()
+        {
+            return String.Format("\"settings\":{{{0}}}", Settings.SerializeSettings());
+        }
+
+        #endregion
+
         #region Private helpers
+        
         protected void SendTrialStateChanged(Trial.TrialState fromState, Trial.TrialState toState)
         {
             TrialStateChanged?.Invoke(this, new IExperimentLoggable.TrialStateArgs{Experiment = this, FromState = fromState.ToString(), ToState = toState.ToString()});
