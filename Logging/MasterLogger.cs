@@ -31,6 +31,8 @@ namespace cyberframe.Logging
         [SerializeField] [Required]
         private PlayerLogger _playerLogger = null;
 
+        [ShowInInspector,FolderPath] private string LogSaveDirectory => Log.LogSaveDirectory;
+
         #region Monobehaviour
         void Awake()
         {

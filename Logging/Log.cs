@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace cyberframe.Logging
@@ -26,6 +27,9 @@ namespace cyberframe.Logging
         public string DateString;
         const string RelativePath = "/logs/";
 
+        [ShowInInspector]
+        public static string LogSaveDirectory => Application.persistentDataPath + RelativePath;
+
         /// <summary>
         /// polymorph for init with timepstmp provided by master log 
         /// </summary>
@@ -36,7 +40,7 @@ namespace cyberframe.Logging
         {
             DateString = timestamp;
             var folderName = id + "_" + DateTime.Now.ToString("dd-MM-yyy") + "/";
-            FilePath = Application.persistentDataPath + RelativePath + folderName;
+            FilePath = LogSaveDirectory + folderName;
             Directory.CreateDirectory(FilePath);
             var FileName = FilePath + id + "_" + logName + "_" + timestamp + ".txt";
             _logFile = new StreamWriter(FileName, true)
