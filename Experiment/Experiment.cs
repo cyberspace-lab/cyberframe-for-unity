@@ -304,7 +304,7 @@ namespace cyberframe.Experiment
         #region Logging
         public virtual string ExperimentHeaderLog()
         {
-            return String.Format("\"settings\":{{{0}}}", Settings.SerializeSettings());
+            return String.Format("\"settings\":{0}", Settings.SerializeSettings());
         }
 
         #endregion
