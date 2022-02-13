@@ -14,16 +14,13 @@ namespace cyberframe.Experiment
 
         public static ExperimentManager instance;
         
-        [BoxGroup("Required objects")]
-        [SerializeField]
-        [Required] 
-        [InlineEditor]
+        [BoxGroup("Required objects"), SerializeField, Required, InlineEditor]
         private ExperimentSettingsHolder _settingsHolder = null;
 
         [BoxGroup("Required objects"), ShowInInspector, SerializeField, Required]
         private Dictionary<string, Experiment> _experiments;
 
-        [ShowInInspector][InlineEditor()]
+        [ShowInInspector, InlineEditor()]
         public Experiment Experiment
         {
             get
@@ -36,7 +33,7 @@ namespace cyberframe.Experiment
             }
         }
 
-        [BoxGroup("ExperimentState"),ShowInInspector] 
+        [BoxGroup("ExperimentState"), ShowInInspector] 
         public bool IsExperimentRunning => Experiment != null && Experiment.IsRunning;
 
         #region MonoBehaviour
@@ -57,8 +54,7 @@ namespace cyberframe.Experiment
         #endregion
 
         #region Public API
-        [Button(ButtonSizes.Medium)]
-        [GUIColor(0,1,0)]
+        [Button(ButtonSizes.Medium), GUIColor(0,1,0)]
         public void PrepareExperiment()
         {
             if (Experiment == null)
@@ -81,8 +77,7 @@ namespace cyberframe.Experiment
             OnExperimentReady?.Invoke();
         }
 
-        [Button(ButtonSizes.Medium)]
-        [GUIColor(1,0.2f,0)]
+        [Button(ButtonSizes.Medium), GUIColor(1,0.2f,0)]
         public void StartFinishExperiment()
         {
             switch (Experiment.CurrentExperimentState)

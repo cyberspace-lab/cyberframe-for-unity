@@ -13,10 +13,7 @@ namespace cyberframe.Experiment
 
         public string ExperimentName = "Settings";
 
-        [FoldoutGroup("Serialization")]
-        [InfoBox("$_serializedSettings")]
-        [ShowInInspector]
-        [JsonIgnore]
+        [FoldoutGroup("Serialization"), InfoBox("$_serializedSettings"), ShowInInspector, JsonIgnore]
         private string _serializedSettings = "";
 
         public abstract TrialSettings GetTrialSettings(int i);

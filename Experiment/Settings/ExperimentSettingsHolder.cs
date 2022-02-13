@@ -12,13 +12,13 @@ namespace cyberframe.Experiment
         public event SettingsChangeHandler OnSettingsChanged;
         public event SettingsChangeHandler OnSettingsParseError;
 
-        [ShowInInspector]
-        [InlineEditor]
+        [ShowInInspector, InlineEditor]
         public ExperimentSettings ActiveSettings { get; private set; }
 
         public bool HasActivesettings => ActiveSettings != null;
         
-        [InlineEditor()] public List<ExperimentSettings> Settings;
+        [InlineEditor()] 
+        public List<ExperimentSettings> Settings;
 
         public void TrySetSettings(ExperimentSettings settings)
         {
