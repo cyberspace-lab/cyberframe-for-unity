@@ -10,7 +10,7 @@ namespace cyberframe.Logging
     /// It differs from the Log class in that it incorporates the monoBehaviour for Application quit etc.
     /// </summary>
     ///  
-    public abstract class MonoLog : MonoBehaviour
+    public abstract class MonoLog : SerializedMonoBehaviour
     {
         //class that takes care of System logging, not derived from the monobehaviour
         protected Log Log;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using cyberframe.Logging;
 using UnityEngine;
 
 // SOURCE https://sharpcoderblog.com/blog/unity-3d-fps-controller
@@ -129,11 +130,11 @@ public class BasicFirstPersonController : cyberframe.Player.PlayerController
         throw new System.NotImplementedException();
     }
 
-    public override string HeaderLine()
+    public override List<string> LogVariableNames()
     {
-        return "Position; Rotation.X; Rotation.Y;";
+        return new List<string>(){"Position", "Rotation.X", "Rotation.Y"};
     }
-    public override List<string> PlayerInformation()
+    public override List<string> LogVariableValues()
     {
         var strgs = new List<string>
         {
@@ -144,11 +145,16 @@ public class BasicFirstPersonController : cyberframe.Player.PlayerController
         return strgs;
     }
 
+    public override List<string> PlayerInput()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override Dictionary<string, string> PlayerInformationDictionary()
     {
         var strgs = new Dictionary<string, string>
         {
-            {"Position", Position.ToString("F4")},
+            {"Position", Log.VectorString(Position)},
             {"Rotation.x", Rotation.x.ToString("F4")},
             {"Rotation.y", Rotation.y.ToString("F4")}
         };

@@ -79,13 +79,24 @@ namespace cyberframe.Logging
         //takes a list of string as an argument and turns them into a one line that is written into the file
         public void WriteList(List<string> data)
         {
-            //basically LINQ foreach
-            var line = data.Aggregate("", (current, text) => current + (text + ";"));
+            var line = CreateLine(data);
             _logFile.WriteLine(line);
         }
 
         #region Helpers
         public static string NewLine => Environment.NewLine;
+
+        public static string CreateLine(List<string> data)
+        {
+            //basically LINQ foreach
+            var line = data.Aggregate("", (current, text) => current + text + ";");
+            return line;
+        }
+
+        public static string VectorString(Vector3 input)
+        {
+            return input.ToString("F4");
+        }
 
         #endregion
     }

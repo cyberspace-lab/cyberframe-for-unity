@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using cyberframe.Helpers;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace cyberframe.Logging
         private float _deltaTime;
         private double _lastTimeWrite;
 
+        [SerializeField]
         private IPlayerLoggable _player;
 
         //this is for filling in custom number of fields that follow after common fields
@@ -28,11 +30,11 @@ namespace cyberframe.Logging
         // create empty single column
         private const int NEmpty = 1;
 
-        [ShowInInspector, BoxGroup("Log output")]
-        private string Header => _player == null ? "" : _player.HeaderLine();
+        [BoxGroup("Log output"), InfoBox("$Header"), ShowInInspector]
+        private string Header => _player == null ? "" : HeaderLine();
 
-        [ShowInInspector, BoxGroup("Log output")]
-        private string PlayerInformationLine => _player == null ? "" : string.Join("; ", _player.PlayerInformation());
+        [ShowInInspector, InfoBox("$ExampleLine"),  BoxGroup("Log output")]
+        private string ExampleLine => _player == null ? "" : Log.CreateLine(CollectData());
 
         #region MonoBehaviour
 
@@ -85,19 +87,19 @@ namespace cyberframe.Logging
                 Log.WriteLine("No valid player has been assigned");
                 return;
             }
-            //this is the header line for analysiss software
             _lastTimeWrite = SystemTimer.timeSinceMidnight;
             IsLogging = true;
         }
+        
         public void StopLogging()
         {
             if (!IsLogging) return;
             IsLogging = false;
         }
+
         public void LogPlayerUpdate()
         {
             var strgs = CollectData();
-            //strgs.AddRange(WriteBlank(NEmpty));
             WriteLine(strgs);
         }
         #endregion
@@ -105,20 +107,29 @@ namespace cyberframe.Logging
         #region private function
         private string HeaderLine()
         {
-            var line = "Time;";
-            line += _player.HeaderLine();
-            line += "FPS";
+            var strgs = new List<string>() {"Time"};
+            strgs.AddRange(_player.LogVariableNames());
+            strgs.Add("Input");
+            strgs.Add("FPS");
+            var line = Log.CreateLine(strgs);
             return line;
         }
+
         private List<string> CollectData()
         {
             //TestData to Write is a parent method that adds some information to the beginning of the player info
-            var strgs = _player.PlayerInformation();
+            var strgs = _player.LogVariableValues();
             AddTimestamp(ref strgs);
+            strgs.Add(FormatPlayerInput(_player.PlayerInput()));
             //adds FPS
             AddValue(ref strgs, (1.0f / _deltaTime).ToString("F4"));
-            //needs an empty column for possible input information
             return strgs;
+        }
+
+        private string FormatPlayerInput(List<string> playerInput)
+        {
+            if (playerInput.Count == 0) return "[]";
+            return string.Format("[{0}]", playerInput.Aggregate((i, j) => i + "," + j));
         }
         #endregion
     }

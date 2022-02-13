@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using cyberframe.Logging;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -30,6 +29,7 @@ namespace cyberframe.Player
 
         protected virtual void OnUpdate(){}
         #endregion
+
         #region Public API
         #region Moving
         [Button]
@@ -81,6 +81,7 @@ namespace cyberframe.Player
         public abstract void SetHeight(float height);
         public abstract void SetSpeed(float speed);
         #endregion
+
         #region Information
         public abstract Vector2 PointingDirection { get; }
         #endregion
@@ -98,8 +99,12 @@ namespace cyberframe.Player
         #endregion
 
         #region Logging interface implementation
-        public abstract string HeaderLine();
-        public abstract List<string> PlayerInformation();
+        public abstract List<string> LogVariableNames();
+
+        public abstract List<string> LogVariableValues();
+
+        public abstract List<string> PlayerInput();
+
         public abstract Dictionary<string, string> PlayerInformationDictionary();
         #endregion
     }
