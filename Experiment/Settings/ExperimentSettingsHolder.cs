@@ -40,6 +40,12 @@ namespace cyberframe.Experiment
             ActiveSettings = settings;
             OnSettingsChanged?.Invoke();
         }
+
+        public void UnsetSettings()
+        {
+            ActiveSettings = null;
+            OnSettingsChanged?.Invoke();
+        }
     }
 }
 
