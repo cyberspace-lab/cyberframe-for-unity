@@ -9,6 +9,23 @@ namespace cyberframe.Experiment.Settings
     {
         [SerializeField, Required]
         public List<ExperimentSettings> Settings { get; private set; }
+
+        public int iActiveSettings { get; private set; }
+
+        public void SetNextSettings()
+        {
+            iActiveSettings += 1;
+            if (iActiveSettings <= Settings.Count - 1) return;
+            Debug.LogWarning("There are not more settings.");
+            iActiveSettings = Settings.Count;
+        }
+
+        public void SetFirstSettings()
+        {
+            iActiveSettings = 0;
+        }
+        
+        public ExperimentSettings ActiveSettings => Settings[iActiveSettings];
     
         public override TrialSettings GetTrialSettings(int i)
         {
