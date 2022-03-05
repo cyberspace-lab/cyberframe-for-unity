@@ -25,7 +25,7 @@ namespace cyberframe.Experiment
             private set => _activeSettings = value;
         }
 
-        public bool HasSchedule => _activeSettings != null && (_activeSettings.GetType() != typeof(ExperimentSchedule));
+        public bool HasSchedule => _activeSettings != null && (_activeSettings is ExperimentSchedule);
 
         [ShowInInspector, InlineEditor()]
         public ExperimentSchedule ActiveSchedule

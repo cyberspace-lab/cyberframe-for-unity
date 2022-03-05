@@ -122,8 +122,6 @@ namespace cyberframe.Experiment
         public event EventHandler<IExperimentLoggable.TrialEventArgs> TrialEventSent;
         public event EventHandler<IExperimentLoggable.ExperimentMessageArgs> MessageSent;
 
-
-
         #region Monobehaviour
         void Update()
         {
