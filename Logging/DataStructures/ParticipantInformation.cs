@@ -5,7 +5,13 @@ namespace cyberframe.Logging.DataStructures
     [CreateAssetMenu(fileName = "Participant information", menuName = "cyberframe/Participant info", order = 20)]
     public class ParticipantInformation : ScriptableObject
     {
-        public string Code = "";
+        public string _code = "";
+
+        public string Code
+        {
+            get => (_code == "" ? "NEO" : _code);
+            set => _code = value;
+        }
         public int Age = -1;
         public string Gender = "";
 
