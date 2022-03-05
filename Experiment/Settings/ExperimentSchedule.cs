@@ -17,7 +17,7 @@ namespace cyberframe.Experiment.Settings
             iActiveSettings += 1;
             if (iActiveSettings <= Settings.Count - 1) return;
             Debug.LogWarning("There are not more settings.");
-            iActiveSettings = Settings.Count;
+            iActiveSettings = Settings.Count - 1;
         }
 
         public void SetFirstSettings()
