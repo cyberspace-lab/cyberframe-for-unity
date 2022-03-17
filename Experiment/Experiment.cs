@@ -112,7 +112,7 @@ namespace cyberframe.Experiment
         public event TrialStateHandler OnTrialFinished;
 
         // INTERFACE IEXPERIMENTLOGGABLE IMPLEMENTATION -------------------
-        public string Name => Settings.ExperimentName;
+        public string Name => Settings == null ? "Settings missing" : Settings.ExperimentName;
         public int TrialNumber => iTrial;
         public int ExperimentNumber => 0;
 
