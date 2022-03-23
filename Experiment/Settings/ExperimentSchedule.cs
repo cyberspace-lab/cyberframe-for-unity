@@ -12,6 +12,11 @@ namespace cyberframe.Experiment.Settings
 
         public int iActiveSettings { get; private set; }
 
+        void OnEnable()
+        {
+            SetFirstSettings();
+        }
+        
         public void SetNextSettings()
         {
             iActiveSettings += 1;
@@ -19,7 +24,7 @@ namespace cyberframe.Experiment.Settings
             Debug.LogWarning("There are not more settings.");
             iActiveSettings = Settings.Count - 1;
         }
-
+        
         public void SetFirstSettings()
         {
             iActiveSettings = 0;
