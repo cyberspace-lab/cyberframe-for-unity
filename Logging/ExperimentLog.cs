@@ -10,6 +10,8 @@ namespace cyberframe.Logging
         [ShowInInspector]
         private IExperimentLoggable _experiment;
 
+        private readonly List<string> _headerLine = new List<string>() { "Time", "Sender", "Index", "Type", "Event" };
+
         public override bool IsValid => _experiment != null;
 
         protected override string LogName => "experiment_" + _experiment.Name;
@@ -28,7 +30,7 @@ namespace cyberframe.Logging
         {
             if (!IsValid) return;
             Log.WriteBlock("TEST HEADER", _experiment.ExperimentHeaderLog());
-            Log.WriteLine("Time;Sender;Index;Type;Event;");
+            Log.WriteList(_headerLine);
         }
 
         public void StartLogging()

@@ -258,6 +258,7 @@ namespace cyberframe.Experiment
             {
                 throw new Exception("Experiment is not running, cannot finish");
             }
+            // TOOD add finishign of trial in case it is still running
             ExperimentOnFinish();
             CurrentExperimentState = ExperimentState.Finished;
             OnExperimentFinished?.Invoke();

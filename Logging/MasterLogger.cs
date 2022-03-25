@@ -11,7 +11,7 @@ namespace cyberframe.Logging
     [RequireComponent(typeof(PlayerLogger))]
     public class MasterLogger : MonoBehaviour
     {
-        public static MasterLogger instance;
+        public static MasterLogger Instance;
         
         [InlineEditor()]
         public ParticipantInformation ParticipantInfo;
@@ -36,7 +36,7 @@ namespace cyberframe.Logging
         #region Monobehaviour
         void Awake()
         {
-            instance = this;
+            Instance = this;
         }
 
         void Start()

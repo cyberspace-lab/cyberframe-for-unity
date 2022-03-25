@@ -89,7 +89,8 @@ namespace cyberframe.Logging
         public static string CreateLine(List<string> data)
         {
             //basically LINQ foreach
-            var line = data.Aggregate("", (current, text) => current + text + ";");
+            var line = string.Join(";", data);
+            //var line = data.Aggregate("", (current, text) => current + text + ";");
             return line;
         }
 
