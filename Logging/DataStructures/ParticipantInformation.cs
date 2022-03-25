@@ -9,11 +9,11 @@ namespace cyberframe.Logging.DataStructures
 
         public string Code
         {
-            get => (_code == "" ? "NEO" : _code);
+            get => _code == "" ? "NEO" : _code;
             set => _code = value;
         }
 
-        public bool HasCode => _code == "";
+        public bool HasCode => _code != "";
         
         public int Age = -1;
         public string Gender = "";
