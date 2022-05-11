@@ -52,12 +52,7 @@ namespace cyberframe.Experiment
 
         [BoxGroup("Validation")]
         [Button]
-        public bool Validate()
-        {
-            // validate color
-            // validate images
-            return true;
-        }
+        public abstract bool Validate();
 
 
 #if UNITY_EDITOR

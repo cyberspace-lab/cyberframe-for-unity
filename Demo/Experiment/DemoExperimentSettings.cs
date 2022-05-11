@@ -15,6 +15,11 @@ namespace cyberframe.Demo
         {
             return TrialSettings[i];
         }
+
+        public override bool Validate()
+        {
+            return true;
+        }
     }
 
     [Serializable]

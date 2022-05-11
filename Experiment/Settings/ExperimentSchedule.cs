@@ -36,5 +36,11 @@ namespace cyberframe.Experiment.Settings
         {
             throw new System.NotImplementedException();
         }
+
+        public override bool Validate()
+        {
+            // iterate through all and return if they are valid
+            return true;
+        }
     }
 }
