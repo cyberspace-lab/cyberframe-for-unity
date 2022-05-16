@@ -80,6 +80,11 @@ namespace cyberframe.Experiment
         [Button(ButtonSizes.Medium), GUIColor(1,0.2f,0)]
         public void StartFinishExperiment()
         {
+            if (Experiment == null)
+            {
+                Debug.LogWarning("No experiment is setup");
+                return;
+            }
             switch (Experiment.CurrentExperimentState)
             {
                 case Experiment.ExperimentState.Running:
