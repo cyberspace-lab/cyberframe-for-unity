@@ -141,8 +141,15 @@ namespace cyberframe.Experiment
             CurrentTrialTime = -1;
             _waitingToPause = false;
             
-            ExperimentOnSetup();
-            CurrentExperimentState = ExperimentState.Prepared;
+            var valid = ExperimentOnSetup();
+            if (valid)
+            {
+                CurrentExperimentState = ExperimentState.Prepared;
+            }
+            else
+            {
+                Debug.LogWarning("Could not setup the experiment");
+            }
         }
 
         public void StartExperiment()
@@ -276,7 +283,11 @@ namespace cyberframe.Experiment
         // This gets updated from Experiment manager, which is monobehaviou
         public virtual void OnUpdate(){}
         public virtual void OnFixedUpdate(){}
-        protected virtual void ExperimentOnSetup(){}
+
+        protected virtual bool ExperimentOnSetup()
+        {
+            return true;
+        }
         protected virtual void ExperimentOnStart(){}
         protected virtual void ExperimentAfterStart(){}
         protected virtual void ExperimentOnPause(){}

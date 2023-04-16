@@ -17,7 +17,7 @@ namespace cyberframe.Demo
             return iTrial >= (_targets.Count - 2);
         }
 
-        protected override void ExperimentOnSetup()
+        protected override bool ExperimentOnSetup()
         {
             var targets = FindObjectsOfType<DemoTarget>();
             _targets = new List<DemoTarget>(targets);
@@ -25,6 +25,7 @@ namespace cyberframe.Demo
             {
                 target._experiment = this;
             }
+            return true;
         }
 
         protected override void ExperimentAfterStart()
