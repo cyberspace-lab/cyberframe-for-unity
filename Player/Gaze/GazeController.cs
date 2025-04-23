@@ -1,4 +1,3 @@
-using BNG;
 using UnityEngine;
 
 namespace cyberframe.Player.Gaze
