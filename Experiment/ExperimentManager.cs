@@ -1,6 +1,7 @@
 using System;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEngine.Rendering;
+using Unity.XR.CoreUtils.Collections;
 using UnityEngine;
 
 namespace cyberframe.Experiment
@@ -18,7 +19,7 @@ namespace cyberframe.Experiment
         private ExperimentSettingsHolder _settingsHolder = null;
 
         [BoxGroup("Required objects"), ShowInInspector, SerializeField, Required]
-        private Dictionary<string, Experiment> _experiments;
+        private SerializableDictionary<string, Experiment> _experiments;
 
         [ShowInInspector, InlineEditor()]
         public Experiment Experiment
