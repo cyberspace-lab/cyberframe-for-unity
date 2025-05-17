@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using cyberframe.Experiment.Settings;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace cyberframe.Experiment
@@ -16,9 +17,10 @@ namespace cyberframe.Experiment
         [InlineEditor()] 
         public List<ExperimentSettings> Settings;
         
+        [SerializeField, InlineEditor, BoxGroup("Settings")]
         private ExperimentSettings _activeSettings;
         
-        [ShowInInspector, InlineEditor()]
+        [ShowInInspector, InspectorLabel("Returned active settings"), ReadOnly]
         public ExperimentSettings ActiveSettings
         {
             get => !HasSchedule ? _activeSettings : ((ExperimentSchedule)_activeSettings).ActiveSettings;
@@ -27,7 +29,7 @@ namespace cyberframe.Experiment
 
         public bool HasSchedule => _activeSettings != null && (_activeSettings is ExperimentSchedule);
 
-        [ShowInInspector, InlineEditor()]
+        [ShowInInspector, InlineEditor, ReadOnly]
         public ExperimentSchedule ActiveSchedule
         {
             get

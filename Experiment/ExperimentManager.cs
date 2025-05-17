@@ -1,7 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine.Rendering;
-using Unity.XR.CoreUtils.Collections;
 using UnityEngine;
 
 namespace cyberframe.Experiment
@@ -19,14 +18,14 @@ namespace cyberframe.Experiment
         private ExperimentSettingsHolder _settingsHolder = null;
 
         [BoxGroup("Required objects"), ShowInInspector, SerializeField, Required]
-        private SerializableDictionary<string, Experiment> _experiments;
+        private SerializedDictionary<string, Experiment> _experiments;
 
         [ShowInInspector, InlineEditor()]
         public Experiment Experiment
         {
             get
             {
-                if (_settingsHolder == null) return null;
+                if (!_settingsHolder) return null;
                 if (!_settingsHolder.HasActivesettings) return null;
                 if (_experiments == null) return null;
                 return _experiments.ContainsKey(_settingsHolder.ActiveSettings.ExperimentName) ? 
@@ -34,18 +33,17 @@ namespace cyberframe.Experiment
             }
         }
 
-        [BoxGroup("ExperimentState"), ShowInInspector] 
+        [BoxGroup("Experiment state"), ShowInInspector, EnumToggleButtons]
+        public Experiment.ExperimentState ActiveExperimentState => Experiment == null ? 
+            Experiment.ExperimentState.None : Experiment.CurrentExperimentState;
+        
+        [BoxGroup("Experiment state"), ShowInInspector]
         public bool IsExperimentRunning => Experiment != null && Experiment.IsRunning;
 
         #region MonoBehaviour
         void Awake()
         {
             instance = this;
-        }
-
-        void Start()
-        {
-            //TODO - language settings
         }
 
         void OnDestroy()
@@ -136,9 +134,6 @@ namespace cyberframe.Experiment
             Experiment.Cleanup();
         }
         
-        public void GoToMenu()
-        {
-        }
         #endregion
 
         #region Private helpers
@@ -151,7 +146,7 @@ namespace cyberframe.Experiment
         
         private void UnsubscribeExperiment(Experiment experiment)
         {
-            if (experiment == null) return;
+            if (!experiment) return;
             experiment.OnExperimentFinished -= HandleExperimentFinished;
             experiment.OnExperimentPaused -= HandleExperimentPaused;
             experiment.OnExperimentStarted -= HandleExperimentStarted;
@@ -162,13 +157,10 @@ namespace cyberframe.Experiment
             OnExperimentStarted?.Invoke();
         }
         
-        private void HandleExperimentPaused()
-        {
-        }
+        private void HandleExperimentPaused() {}
 
         private void HandleExperimentFinished()
         {
-            //TODO - localization
             OnExperimentFinished?.Invoke();
             UnsubscribeExperiment(Experiment);
         }

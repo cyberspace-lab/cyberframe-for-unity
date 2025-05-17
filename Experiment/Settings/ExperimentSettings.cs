@@ -24,8 +24,7 @@ namespace cyberframe.Experiment
             return txt;
         }
 
-        [FoldoutGroup("Serialization")]
-        [Button]
+        [FoldoutGroup("Serialization")] [Button]
         public string SerializeSettings()
         {
             var strJson = JsonConvert.SerializeObject(this, SerialisationConstants.SerialisationSettings());
@@ -33,8 +32,7 @@ namespace cyberframe.Experiment
             return strJson;
         }
 
-        [FoldoutGroup("Serialization")]
-        [Button]
+        [FoldoutGroup("Serialization")] [Button]
         public bool DeserializeSettings(string content)
         {
             //var settings = ScriptableObject.CreateInstance(GetType());
@@ -50,8 +48,7 @@ namespace cyberframe.Experiment
             return true;
         }
 
-        [BoxGroup("Validation")]
-        [Button]
+        [BoxGroup("Validation")] [Button]
         public abstract bool Validate();
 
 

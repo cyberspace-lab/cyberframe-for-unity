@@ -23,9 +23,7 @@ namespace cyberframe.Experiment
         }
 
         private ExperimentState _currentExperimentState;
-        [BoxGroup("Experiment state")]
-        [ShowInInspector]
-        [EnumToggleButtons]
+        [BoxGroup("Experiment state"), ShowInInspector, EnumToggleButtons] 
         public ExperimentState CurrentExperimentState
         {
             get => _currentExperimentState;
@@ -51,15 +49,12 @@ namespace cyberframe.Experiment
         [ShowInInspector]
         private bool _waitingToPause;
 
-        [BoxGroup("Experiment state")]
-        [ShowInInspector]
+        [BoxGroup("Experiment state"), ShowInInspector]
         public bool IsPaused => CurrentExperimentState == ExperimentState.Paused;
 
         private Trial.TrialState _currentTrialState;
 
-        [BoxGroup("Trial state")]
-        [ShowInInspector]
-        [EnumToggleButtons]
+        [BoxGroup("Trial state"), ShowInInspector, EnumToggleButtons]
         public Trial.TrialState CurrentTrialState
         {
             get => _currentTrialState;
@@ -79,20 +74,18 @@ namespace cyberframe.Experiment
 
         //we need to start the count at -1 as the first trial is called with NextTrial which
         // increments it by 1
-        [BoxGroup("Trial state")]
-        [ShowInInspector]
+        [BoxGroup("Trial state"), ShowInInspector]
         public int iTrial { get; private set; } = -1;
 
         private float _trialStartTime;
 
-        [ShowInInspector]
-        [BoxGroup("Trial state")]
+        [ShowInInspector, BoxGroup("Trial state")]
         public float CurrentTrialTime { get; protected set; } = -1;
 
         protected TrialSettings CurrentTrialsettings => Settings.GetTrialSettings(iTrial);
 
-        [ShowInInspector][InlineEditor()]
-        public ExperimentSettings Settings { get; protected set; }
+        [ShowInInspector, InlineEditor]
+        public ExperimentSettings Settings;
 
         public delegate void ExperimentStateChangeHandler(ExperimentState state);
         public event ExperimentStateChangeHandler OnExperimentStateChanged;
@@ -210,6 +203,7 @@ namespace cyberframe.Experiment
         #endregion
 
         #region Trial control
+        [BoxGroup("Experiment control"), Button("Next trial")]
         protected void NextTrial()
         {
             // this shoudl probably never be executed, as the experiment finished
